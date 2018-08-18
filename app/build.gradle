@@ -1,0 +1,55 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    defaultConfig {
+        applicationId "org.chromium.content_shell_apk"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+        multiDexEnabled true
+        ndk {
+            abiFilters "armeabi-v7a"
+        }
+    }
+    aaptOptions {
+        noCompress "dat", "bin", "pak"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
+    implementation "com.google.android.gms:play-services-auth:$rootProject.ext.playServicesVersion"
+    implementation "com.google.android.gms:play-services-cast:$rootProject.ext.playServicesVersion"
+    implementation "com.google.android.gms:play-services-gcm:$rootProject.ext.playServicesVersion"
+    implementation "com.google.android.gms:play-services-identity:$rootProject.ext.playServicesVersion"
+    implementation "com.google.android.gms:play-services-nearby:$rootProject.ext.playServicesVersion"
+    implementation "com.google.android.gms:play-services-vision:$rootProject.ext.playServicesVersion"
+    implementation "com.google.android.gms:play-services-location:$rootProject.ext.playServicesVersion"
+    implementation 'com.google.code.findbugs:jsr305:3.0.2'
+    implementation 'com.android.support:multidex:1.0.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation project(':content')
+    implementation project(':content_shell')
+    implementation project(':media')
+    implementation project(':ui')
+    implementation project(':components:embedder_support')
+}
