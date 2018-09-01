@@ -10,7 +10,7 @@ public class NativeLibraries {
     public static final String[] LIBRARIES =
       {"content_shell_content_view"};
     static String sVersionNumber =
-      "70.0.3522.0";
+      "";
     public static int sCpuFamily =
         CPU_FAMILY_UNKNOWN;
 }
